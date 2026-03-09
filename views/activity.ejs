@@ -1,0 +1,64 @@
+<%- include('partials/header', { title: 'Activity Log' }) %>
+
+<div class="dashboard-wrapper">
+  <%- include('partials/sidebar', { activePage: 'activity' }) %>
+
+  <div class="main-content">
+    <h1>Activity Log</h1>
+    <p class="page-subtitle">Recent actions across the application.</p>
+
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Today, 10:42 AM</td>
+            <td><%= user.name %></td>
+            <td><span class="badge badge-green">Login</span></td>
+            <td>Logged in from 192.168.1.10</td>
+          </tr>
+          <tr>
+            <td>Today, 09:15 AM</td>
+            <td>System</td>
+            <td><span class="badge badge-yellow">Migration</span></td>
+            <td>Database migration 001 applied</td>
+          </tr>
+          <tr>
+            <td>Yesterday, 04:30 PM</td>
+            <td><%= user.name %></td>
+            <td><span class="badge badge-green">Signup</span></td>
+            <td>Account created successfully</td>
+          </tr>
+          <tr>
+            <td>Yesterday, 02:12 PM</td>
+            <td>System</td>
+            <td><span class="badge badge-gray">Config</span></td>
+            <td>Session secret updated</td>
+          </tr>
+          <tr>
+            <td>Mar 7, 11:05 AM</td>
+            <td>System</td>
+            <td><span class="badge badge-gray">Server</span></td>
+            <td>Application started on port 3000</td>
+          </tr>
+          <tr>
+            <td>Mar 7, 10:58 AM</td>
+            <td>System</td>
+            <td><span class="badge badge-yellow">Migration</span></td>
+            <td>Database initialized</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

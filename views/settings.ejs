@@ -1,0 +1,54 @@
+<%- include('partials/header', { title: 'Settings' }) %>
+
+<div class="dashboard-wrapper">
+  <%- include('partials/sidebar', { activePage: 'settings' }) %>
+
+  <div class="main-content">
+    <h1>Settings</h1>
+    <p class="page-subtitle">Manage your account and application preferences.</p>
+
+    <div class="card">
+      <h2>Profile Information</h2>
+      <form style="max-width:480px;">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" value="<%= user.name %>" readonly>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" value="<%= user.email %>" readonly>
+
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" value="<%= user.phone || '' %>" readonly>
+
+        <label for="details">Details</label>
+        <textarea id="details" readonly><%= user.details || '' %></textarea>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Application Preferences</h2>
+      <table class="data-table" style="max-width:480px;">
+        <tr>
+          <td style="font-weight:500;">Session Timeout</td>
+          <td>24 hours</td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;">Email Notifications</td>
+          <td><span class="badge badge-green">Enabled</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:500;">Two-Factor Auth</td>
+          <td><span class="badge badge-gray">Disabled</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Danger Zone</h2>
+      <p style="color:#6b7280;font-size:0.9rem;margin:0 0 1rem;">Once you delete your account, there is no going back.</p>
+      <button type="button" style="max-width:200px;background:#dc2626;" onclick="alert('Account deletion is not yet implemented.')">Delete Account</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

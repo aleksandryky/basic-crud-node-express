@@ -1,45 +1,134 @@
 <%- include('partials/header', { title: 'Dashboard' }) %>
 
-<header class="site-header">
-  <div class="site-header-inner">
-    <div class="site-title">Basic Auth App</div>
-    <a href="/logout" style="color:#f9fafb;text-decoration:none;font-size:0.9rem;">Log out</a>
+<div class="dashboard-wrapper">
+  <%- include('partials/sidebar', { activePage: 'dashboard' }) %>
+
+  <div class="main-content">
+    <h1>Welcome, <%= user.name %>!</h1>
+    <p class="page-subtitle">Here's an overview of your application.</p>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value"><%= typeof totalUsers !== 'undefined' ? totalUsers : '—' %></div>
+        <div class="stat-label">Total Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">12</div>
+        <div class="stat-label">Active Sessions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">48</div>
+        <div class="stat-label">Actions Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">99.9%</div>
+        <div class="stat-label">Uptime</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;">
+      <div class="card">
+        <h2>User Registrations</h2>
+        <canvas id="registrationsChart" height="220"></canvas>
+      </div>
+      <div class="card">
+        <h2>Traffic Sources</h2>
+        <canvas id="trafficChart" height="220"></canvas>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <h2>Monthly Activity</h2>
+      <canvas id="activityChart" height="100"></canvas>
+    </div>
   </div>
-</header>
+</div>
 
-<main class="auth-layout">
-  <div class="auth-layout-center">
-    <section class="auth-card" aria-labelledby="dashboard-title">
-      <h1 id="dashboard-title">Welcome, <%= user.name %>!</h1>
-      <p class="subtitle">You are logged in.</p>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+  const colors = {
+    blue: '#3b82f6',
+    blueLight: 'rgba(59,130,246,0.15)',
+    green: '#22c55e',
+    greenLight: 'rgba(34,197,94,0.15)',
+    orange: '#f97316',
+    purple: '#8b5cf6',
+    gray: '#64748b',
+  };
 
-      <table style="width:100%;border-collapse:collapse;margin-bottom:1.5rem;">
-        <tr>
-          <td style="padding:0.5rem 0;font-weight:500;color:#6b7280;width:90px;">Name</td>
-          <td style="padding:0.5rem 0;"><%= user.name %></td>
-        </tr>
-        <tr>
-          <td style="padding:0.5rem 0;font-weight:500;color:#6b7280;">Email</td>
-          <td style="padding:0.5rem 0;"><%= user.email %></td>
-        </tr>
-        <tr>
-          <td style="padding:0.5rem 0;font-weight:500;color:#6b7280;">Phone</td>
-          <td style="padding:0.5rem 0;"><%= user.phone || '—' %></td>
-        </tr>
-        <tr>
-          <td style="padding:0.5rem 0;font-weight:500;color:#6b7280;vertical-align:top;">Details</td>
-          <td style="padding:0.5rem 0;"><%= user.details || '—' %></td>
-        </tr>
-      </table>
+  new Chart(document.getElementById('registrationsChart'), {
+    type: 'line',
+    data: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      datasets: [{
+        label: 'New Users',
+        data: [12,19,8,25,18,30,22,35,28,40,32,45],
+        borderColor: colors.blue,
+        backgroundColor: colors.blueLight,
+        fill: true,
+        tension: 0.35,
+        pointRadius: 4,
+        pointBackgroundColor: colors.blue,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
 
-      <a href="/logout" class="btn">Log out</a>
-    </section>
-  </div>
-</main>
+  new Chart(document.getElementById('trafficChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Direct','Referral','Social','Organic'],
+      datasets: [{
+        data: [40, 25, 20, 15],
+        backgroundColor: [colors.blue, colors.green, colors.orange, colors.purple],
+        borderWidth: 0,
+        hoverOffset: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '65%',
+      plugins: {
+        legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyleWidth: 10 } }
+      }
+    }
+  });
 
-<footer class="site-footer">
-  &copy; <%= new Date().getFullYear() %> Basic Auth App
-</footer>
-
+  new Chart(document.getElementById('activityChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      datasets: [
+        {
+          label: 'Logins',
+          data: [65,78,52,90,85,110,95,120,105,135,115,140],
+          backgroundColor: colors.blue,
+          borderRadius: 4,
+        },
+        {
+          label: 'Signups',
+          data: [12,19,8,25,18,30,22,35,28,40,32,45],
+          backgroundColor: colors.green,
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top', labels: { usePointStyle: true, pointStyleWidth: 10 } } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+</script>
 </body>
 </html>
