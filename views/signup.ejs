@@ -1,0 +1,50 @@
+<%- include('partials/header', { title: 'Sign Up' }) %>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-title">Basic Auth App</div>
+  </div>
+</header>
+
+<main class="auth-layout">
+  <div class="auth-layout-center">
+    <section class="auth-card" aria-labelledby="signup-title">
+      <h1 id="signup-title">Sign Up</h1>
+      <p class="subtitle">Create your account to get started.</p>
+
+      <% if (typeof error !== 'undefined' && error) { %>
+        <p class="error"><%= error %></p>
+      <% } %>
+
+      <form action="/signup" method="POST">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required value="<%= typeof name !== 'undefined' ? name : '' %>">
+
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required value="<%= typeof email !== 'undefined' ? email : '' %>">
+
+        <label for="password">Password *</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" placeholder="e.g. +1 234 567 8900" value="<%= typeof phone !== 'undefined' ? phone : '' %>">
+
+        <label for="details">Details</label>
+        <textarea id="details" name="details" placeholder="Any extra information..."><%= typeof details !== 'undefined' ? details : '' %></textarea>
+
+        <button type="submit">Create account</button>
+      </form>
+
+      <div class="links">
+        Already have an account? <a href="/login">Log in</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  &copy; <%= new Date().getFullYear() %> Basic Auth App
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "basic-crud-node-express",
+  "version": "1.0.0",
+  "description": "Simple signup and login with Node.js and Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "keywords": [
+    "express",
+    "signup",
+    "login",
+    "crud"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^17.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3"
+  }
+}

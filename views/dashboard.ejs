@@ -1,0 +1,45 @@
+<%- include('partials/header', { title: 'Dashboard' }) %>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-title">Basic Auth App</div>
+    <a href="/logout" style="color:#f9fafb;text-decoration:none;font-size:0.9rem;">Log out</a>
+  </div>
+</header>
+
+<main class="auth-layout">
+  <div class="auth-layout-center">
+    <section class="auth-card" aria-labelledby="dashboard-title">
+      <h1 id="dashboard-title">Welcome, <%= user.name %>!</h1>
+      <p class="subtitle">You are logged in.</p>
+
+      <table style="width:100%;border-collapse:collapse;margin-bottom:1.5rem;">
+        <tr>
+          <td style="padding:0.5rem 0;font-weight:500;color:#6b7280;width:90px;">Name</td>
+          <td style="padding:0.5rem 0;"><%= user.name %></td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem 0;font-weight:500;color:#6b7280;">Email</td>
+          <td style="padding:0.5rem 0;"><%= user.email %></td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem 0;font-weight:500;color:#6b7280;">Phone</td>
+          <td style="padding:0.5rem 0;"><%= user.phone || '—' %></td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem 0;font-weight:500;color:#6b7280;vertical-align:top;">Details</td>
+          <td style="padding:0.5rem 0;"><%= user.details || '—' %></td>
+        </tr>
+      </table>
+
+      <a href="/logout" class="btn">Log out</a>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  &copy; <%= new Date().getFullYear() %> Basic Auth App
+</footer>
+
+</body>
+</html>
